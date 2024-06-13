@@ -1,6 +1,11 @@
 {
     "cSpell.words": [
-        "bootcamp",
-        "bootcamps"
-    ]
+        "job",
+        "jobs"
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#093427",
+        "titleBar.activeBackground": "#0D4937",
+        "titleBar.activeForeground": "#F0FCF9"
+    }
 }
