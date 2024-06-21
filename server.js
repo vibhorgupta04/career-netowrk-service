@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const colors = require('colors');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
+const cookieParser = require('cookie-parser');
 
 const logger = require('./middleware/logger');
 
@@ -16,6 +17,7 @@ connectDB();
 // Routes files
 const bootcamps = require('./routes/bootcamps');
 const jobs = require('./routes/jobs');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -23,6 +25,8 @@ const app = express();
 app.use(express.json());
 
 // app.use(logger);
+// Cookie parser
+app.use(cookieParser());
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -32,6 +36,7 @@ if (process.env.NODE_ENV === 'development') {
 // Mounts routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/jobs', jobs);
+app.use('/api/v1/auth', auth);
 
 app.use(errorHandler);
 
