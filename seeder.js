@@ -23,19 +23,19 @@ mongoose.connect(process.env.MONGO_URI, {
 // const bootcamps = JSON.parse(
 //   fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8')
 // );
-const jobs = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/jobs.json`, 'utf-8')
-);
-// const users = JSON.parse(
-//   fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
+// const jobs = JSON.parse(
+//   fs.readFileSync(`${__dirname}/_data/jobs.json`, 'utf-8')
 // );
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
+);
 
 // Import into DB
 const importData = async () => {
   try {
     // await Bootcamp.create(bootcamps);
-    await Job.create(jobs);
-    // await User.create(users);
+    // await Job.create(jobs);
+    await User.create(users);
     console.log('Data Imported...'.green.inverse);
   } catch (error) {
     console.log(error);

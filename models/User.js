@@ -59,7 +59,7 @@ UserSchema.pre('save', async function (next) {
 });
 
 // Encrypt password using bcrypt while updating (admin)
-UserSchema.pre("findOneAndUpdate", async function (next) {
+UserSchema.pre('findOneAndUpdate', async function (next) {
   if (this._update.password) {
     this._update.password = await bcrypt.hash(this._update.password, 10);
   }
@@ -98,16 +98,20 @@ UserSchema.methods.getResetPasswordToken = function () {
 // Generate email confirm token
 UserSchema.methods.generateEmailConfirmToken = function (next) {
   // email confirmation token
-  const confirmationToken = crypto.randomBytes(20).toString('hex');
+  const resetToken = crypto.randomBytes(20).toString('hex');
 
   this.confirmEmailToken = crypto
     .createHash('sha256')
     .update(confirmationToken)
     .digest('hex');
 
-  const confirmTokenExtend = crypto.randomBytes(100).toString('hex');
-  const confirmTokenCombined = `${confirmationToken}.${confirmTokenExtend}`;
-  return confirmTokenCombined;
+    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000
+
+    return resetToken
+
+  // const confirmTokenExtend = crypto.randomBytes(100).toString('hex');
+  // const confirmTokenCombined = `${confirmationToken}.${confirmTokenExtend}`;
+  // return confirmTokenCombined;
 };
 
 module.exports = mongoose.model('User', UserSchema);
