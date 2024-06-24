@@ -16,7 +16,6 @@ exports.getJobs = asyncHandler(async (req, res, next) => {
   if (reqQuery) {
     // Loop over removeFields  and delete them from reqQuery
     removeFields.forEach((param) => delete reqQuery[param]);
-    console.log('reqQuery---->', reqQuery);
 
     // Create query string
     let queryStr = JSON.stringify(reqQuery);
@@ -36,7 +35,6 @@ exports.getJobs = asyncHandler(async (req, res, next) => {
     const fields = req.query.select.split(',').join(' ');
     console.log('fetchedJobs', fetchedJobs);
     fetchedJobs = fetchedJobs.select(fields);
-    console.log('fields---->', fields);
   }
 
   // Sort

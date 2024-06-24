@@ -2,5 +2,10 @@
     "cSpell.words": [
         "bootcamp",
         "bootcamps"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#093427",
+        "titleBar.activeBackground": "#0D4937",
+        "titleBar.activeForeground": "#F0FCF9"
+    }
 }

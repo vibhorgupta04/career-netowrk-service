@@ -104,7 +104,6 @@ const JobSchema = new mongoose.Schema({
 });
 
 JobSchema.pre('save', function (next) {
-  // console.log('Slugify ran', this.name);
   this.slug = slugify(this.employer_name, { lower: true });
   next();
 });
