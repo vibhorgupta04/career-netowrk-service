@@ -46,6 +46,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
 });
 
 // Encrypt password using bcrypt
@@ -105,9 +106,9 @@ UserSchema.methods.generateEmailConfirmToken = function (next) {
     .update(confirmationToken)
     .digest('hex');
 
-    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
 
-    return resetToken
+  return resetToken;
 
   // const confirmTokenExtend = crypto.randomBytes(100).toString('hex');
   // const confirmTokenCombined = `${confirmationToken}.${confirmTokenExtend}`;

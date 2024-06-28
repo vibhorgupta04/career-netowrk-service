@@ -5,17 +5,17 @@ const colors = require('colors');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 const cookieParser = require('cookie-parser');
+const { swaggerUi, specs } = require('./config/swagger');
 
 const logger = require('./middleware/logger');
 
-// Loads env vars
-dotenv.config({ path: './config/config.env' });
+// Load env vars
 
+require('dotenv').config();
 // Connect to database
 connectDB();
 
 // Routes files
-const bootcamps = require('./routes/bootcamps');
 const jobs = require('./routes/jobs');
 const auth = require('./routes/auth');
 
@@ -33,8 +33,9 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 // Mounts routers
-app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/jobs', jobs);
 app.use('/api/v1/auth', auth);
 
